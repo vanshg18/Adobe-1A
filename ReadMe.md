@@ -79,5 +79,9 @@ Navigate to the project’s root directory and run:
 docker build -t adobe1a .
 
 # Run the container
-docker run --rm adobe1a
+docker run --rm \
+   -v $(pwd)/input:/app/input \
+   -v $(pwd)/output:/app/output \
+   adobe1a
+
 
