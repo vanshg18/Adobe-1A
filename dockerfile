@@ -10,8 +10,14 @@ COPY requirements.txt .
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all files from the root into the container
+# Ensure input/output directories exist even if empty
+RUN mkdir -p /app/input /app/output
+
+# Copy all files (including input/output folders)
 COPY . .
 
-# Default command to run your script
+# Mark input/output as volumes so they can be mounted
+VOLUME ["/app/input", "/app/output"]
+
+# Default command
 CMD ["python", "main.py"]
